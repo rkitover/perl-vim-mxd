@@ -30,6 +30,71 @@
 " let perl_nofold_subs = 1
 
 if exists("b:current_syntax")
+" *** MOOSE STUFF ***
+" TODO:
+" fix $foo->Bar->baz(23)->dongs highlighting
+" make the -> for method calls a different color
+" make methods a different color than variables
+
+" set some nice defaults people usually don't set, unless overridden
+if !exists("perl_include_pod")
+  let perl_include_pod=1
+endif
+if !exists("perl_string_as_statement")
+  let perl_string_as_statement=1
+endif
+
+" Moose (and some other common) functions
+syn match perlStatementProc		"\<\%(blessed\|reftype\|confess\|carp\|croak\|class_has\|has\|inner\|is\|mutable\|immutable\|immutable\|super\|requires\)\>"
+
+" Moose typelib stuff
+syn match perlStatementProc		"\<\%(subtype\|coerce\|as\|from\|via\|message\|enum\|class_type\|role_type\|maybe_type\|duck_type\|optimize_as\|type\|where\)\>"
+
+" Test::More, Test::Moose and Test::Exception stuff (except for "is", which is
+" already highlighted.)
+syn match perlStatementProc             "\<\%(plan\|use_ok\|require_ok\|ok\|isnt\|diag\|like\|unlike\|cmp_ok\|is_deeply\|skip\|can_ok\|isa_ok\|pass\|fail\|BAIL_OUT\|meta_ok\|does_ok\|has_attribute_ok\|throws_ok\|dies_ok\|lives_ok\|lives_and\)\>"
+
+" Try::Tiny
+syn match perlStatementProc		"\<\%(try\|catch\|finally\)\>"
+
+syn match perlMethodName +\%(\h\|::\|['"]\)\%(\w\|::\|\$\)\+["']\?\_s*\|+ contained nextgroup=perlPossibleComma
+
+syn match perlPossibleComma +\_s*\%(=>\|,\)\?\_s*\|+ contained nextgroup=perlAnonSubOrMethod
+
+syn match perlAnonSubOrMethod +\_s*\%(sub\|method\)\_s*\|+ contained contains=perlFunction nextgroup=perlMethodSignature
+
+syn match perlMethodSignature +\_s*\%((\_[^)]*)\)\?\_s*\|+ nextgroup=perlSubAttributes contained contains=@perlExpr,perlStatementProc
+
+syn match perlFunction +\<\%(class\|role\|extends\|with\)\>\_s*+ nextgroup=perlPackageRef
+
+syn match perlFunction +\<\%(method\|before\|after\|around\|override\|augment\)\>\_s*+ nextgroup=perlMethodName
+
+command -nargs=+ HiLink hi def link <args>
+HiLink perlMethodName Function
+delcommand HiLink
+
+"hilite Moose types
+syn match perlString "\<Any\>\|\<Item\>\|\<Bool\>\|\<Maybe\>\|\<Undef\>\|\<Defined\>\|\<Value\>\|\<Num\>\|\<Int\>\|\<Str\>\|\<ClassName\>\|\<Ref\>\|\<ScalarRef\>\|\<ArrayRef\>\|\<HashRef\>\|\<CodeRef\>\|\<RegexpRef\>\|\<GlobRef\>\|\<FileHandle\>\|\<Object\>\|\<Role\>"
+
+if !exists("perl_no_sync_on_sub")
+  syn sync match perlSync	grouphere NONE "^\s*\<method\>"
+  syn sync match perlSync	grouphere NONE "^\s*\<class\>"
+  syn sync match perlSync	grouphere NONE "^\s*\<role\>"
+endif
+
+if exists("perl_fold")
+  if !exists("perl_nofold_subs")
+    syn region perlSubFold     start="^\z(\s*\)\<class\>.*[^};]$" end="^\z1}\s*\%(#.*\)\=$" transparent fold keepend
+    syn region perlSubFold     start="^\z(\s*\)\<method\>.*[^};]$" end="^\z1}\s*\%(#.*\)\=$" transparent fold keepend
+  endif
+endif
+
+" *** END OF MOOSE STUFF, ORIGINAL FOLLOWS ***
+
+if version < 600
+  echoerr ">=vim-6.0 is required to run perl.vim"
+  finish
+elseif exists("b:current_syntax")
   finish
 endif
 
