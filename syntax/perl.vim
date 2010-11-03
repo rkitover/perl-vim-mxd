@@ -1,5 +1,5 @@
 " Vim syntax file
-" Language:      Perl 5
+" Language:      Perl 5 with MooseX::Declare and Moose keywords
 " Maintainer:    Andy Lester <andy@petdance.com>
 " Homepage:      http://github.com/petdance/vim-perl/tree/master
 " Bugs/requests: http://github.com/petdance/vim-perl/issues
@@ -128,7 +128,7 @@ syn region  perlGenericBlock	matchgroup=perlGenericBlock start="{" end="}" conta
 
 " All keywords
 "
-syn match perlConditional		"\<\%(if\|elsif\|unless\|given\|when\|default\)\>"
+syn match perlConditional		"\<\%(if\|elsif\|unless\|given\|when\|default\|switch\|case\)\>"
 syn match perlConditional		"\<else\>" nextgroup=perlElseIfError skipwhite skipnl skipempty
 syn match perlRepeat			"\<\%(while\|for\%(each\)\=\|do\|until\|continue\)\>"
 syn match perlOperator			"\<\%(defined\|undef\|eq\|ne\|[gl][et]\|cmp\|not\|and\|or\|xor\|not\|bless\|ref\|do\)\>"
