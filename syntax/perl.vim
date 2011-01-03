@@ -597,9 +597,7 @@ else
   syn sync maxlines=100
 endif
 
-syn sync match perlSyncPOD	grouphere perlPOD "^=pod"
-syn sync match perlSyncPOD	grouphere perlPOD "^=head"
-syn sync match perlSyncPOD	grouphere perlPOD "^=item"
+syn sync match perlSyncPOD	grouphere perlPOD "^=[a-z]\S*"
 syn sync match perlSyncPOD	grouphere NONE "^=cut"
 
 let b:current_syntax = "perl"
