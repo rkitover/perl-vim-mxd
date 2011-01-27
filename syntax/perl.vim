@@ -29,12 +29,14 @@
 " let perl_nofold_packages = 1
 " let perl_nofold_subs = 1
 
-if exists("b:current_syntax")
-" *** MOOSE STUFF ***
-" TODO:
-" fix $foo->Bar->baz(23)->dongs highlighting
-" make the -> for method calls a different color
-" make methods a different color than variables
+
+
+if version < 600
+  echoerr ">=vim-6.0 is required to run perl.vim"
+  finish
+elseif exists("b:current_syntax")
+  finish
+endif
 
 " set some nice defaults people usually don't set, unless overridden
 if !exists("perl_include_pod")
@@ -43,6 +45,13 @@ endif
 if !exists("perl_string_as_statement")
   let perl_string_as_statement=1
 endif
+
+
+" *** MOOSE STUFF ***
+" TODO:
+"   fix $foo->Bar->baz(23)->dongs highlighting
+"   make the -> for method calls a different color
+"   make methods a different color than variables
 
 " Moose, HTML::FormHandler and some other common functions
 syn match perlStatementProc             "\<\%(blessed\|reftype\|confess\|carp\|croak\|class_has\|has\|has_field\|inner\|is\|mutable\|immutable\|super\|requires\)\>"
@@ -95,15 +104,8 @@ if exists("perl_fold")
     syn region perlSubFold     start="^\z(\s*\)\<method\>.*[^};]$" end="^\z1}\s*\%(#.*\)\=$" transparent fold keepend
   endif
 endif
-
 " *** END OF MOOSE STUFF, ORIGINAL FOLLOWS ***
 
-if version < 600
-  echoerr ">=vim-6.0 is required to run perl.vim"
-  finish
-elseif exists("b:current_syntax")
-  finish
-endif
 
 
 " POD starts with ^=<word> and ends with ^=cut
