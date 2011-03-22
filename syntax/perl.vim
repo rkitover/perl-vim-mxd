@@ -47,7 +47,7 @@ if !exists("perl_string_as_statement")
   let perl_string_as_statement=1
 endif
 if !exists("perl_moose_stuff")
-  let perl_string_as_statement=1
+  let perl_moose_stuff=1
 endif
 
 
