@@ -76,7 +76,7 @@ if perl_moose_stuff
   " Try::Tiny
   syn match perlStatementProc             "\<\%(try\|catch\|finally\)\>"
 
-  syn match perlMethodName                +\%(\h\|::\|['"]\)\%(\w\|::\|\$\)\+["']\?\_s*\|+ contained nextgroup=perlPossibleComma
+  syn match perlMethodName                +\%(\h\|::\|['"]\)\%(\w\|::\|\$\|[{}]\)\+["']\?\_s*\|+ contained nextgroup=perlPossibleComma
   syn match perlPossibleComma             +\_s*\%(=>\|,\)\?\_s*\|+ contained nextgroup=perlAnonSubOrMethod
   syn match perlAnonSubOrMethod           +\_s*\%(sub\|method\)\_s*\|+ contained contains=perlFunction nextgroup=perlMethodSignature
   syn match perlMethodSignature           +\_s*\%((\_[^)]*)\)\?\_s*\|+ nextgroup=perlSubAttributes contained contains=@perlExpr,perlStatementProc
