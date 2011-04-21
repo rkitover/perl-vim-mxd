@@ -1,6 +1,9 @@
 " Vim syntax file
 " Language:      Perl 5 with MooseX::Declare and Moose keywords
-" Maintainer:    Andy Lester <andy@petdance.com>
+" Version:       0.15
+" Maintainer:    Andy Lester <andy@petdance.com>,
+"                Rafael Kitover <rkitover@cpan.org>,
+"                Oleg Kostyuk <cub@cpan.org>
 " Homepage:      http://github.com/petdance/vim-perl/tree/master
 " Bugs/requests: http://github.com/petdance/vim-perl/issues
 " Last Change:   2010-08-10
@@ -79,7 +82,7 @@ if perl_moose_stuff
   syn match perlMethodName                +\%(\h\|::\|['"]\)\%(\w\|::\|\$\|[{}]\)\+["']\?\_s*\|+ contained nextgroup=perlPossibleComma
   syn match perlPossibleComma             +\_s*\%(=>\|,\)\?\_s*\|+ contained nextgroup=perlAnonSubOrMethod
   syn match perlAnonSubOrMethod           +\_s*\%(sub\|method\)\_s*\|+ contained contains=perlFunction nextgroup=perlMethodSignature
-  syn match perlMethodSignature           +\_s*\%((\_[^)]*)\)\?\_s*\|+ nextgroup=perlSubAttributes contained contains=@perlExpr,perlStatementProc
+  syn match perlMethodSignature           +\_s*\%((\_[^)]*)\)\?\_s*\|+ nextgroup=perlSubAttributes,perlComment contained contains=@perlExpr,perlStatementProc
   syn match perlFunction                  +\<\%(class\|role\|extends\|with\)\>\_s*+ nextgroup=perlPackageRef
   syn match perlFunction                  +\<\%(method\|before\|after\|around\|override\|augment\)\>\_s*+ nextgroup=perlMethodName
 
