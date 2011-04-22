@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:      Perl 5 with MooseX::Declare and Moose keywords
-" Version:       0.15
+" Version:       0.16
 " Maintainer:    Andy Lester <andy@petdance.com>,
 "                Rafael Kitover <rkitover@cpan.org>,
 "                Oleg Kostyuk <cub@cpan.org>
