@@ -1,10 +1,10 @@
 " Vim syntax file
 " Language:      Perl POD format with support for arbitrary POD sections
 " Maintainer:    Andy Lester <andy@petdance.com>,
-"                Oleg Kostyuk <cub@cpan.org>
 " Homepage:      https://github.com/rkitover/perl-vim-mxd
 " Bugs/requests: https://github.com/rkitover/perl-vim-mxd/issues
 " Last Change:   2011-01-27
+" Contributors:  Oleg Kostyuk <cub@cpan.org>
 "
 " ORIGINAL VERSION:
 "

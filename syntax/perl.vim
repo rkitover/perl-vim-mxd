@@ -1,13 +1,12 @@
 " Vim syntax file
 " Language:      Perl 5 with MooseX::Declare and Moose keywords
 " Version:       0.16
-" Maintainer:    Andy Lester <andy@petdance.com>,
-"                Rafael Kitover <rkitover@cpan.org>,
-"                Oleg Kostyuk <cub@cpan.org>
+" Maintainer:    Rafael Kitover <rkitover@cpan.org>
 " Homepage:      https://github.com/rkitover/perl-vim-mxd
 " Bugs/requests: https://github.com/rkitover/perl-vim-mxd/issues
 " Last Change:   2011-04-21
 " Contributors:  Andy Lester <andy@petdance.com>
+"                Oleg Kostyuk <cub@cpan.org>
 "                Hinrik Örn Sigurðsson <hinrik.sig@gmail.com>
 "                Lukas Mai <l.mai.web.de>
 "                Nick Hibma <nick@van-laarhoven.org>
