@@ -5,6 +5,8 @@ Changelog for the vim-perl package
 [ENHANCEMENTS]
 perl5:
 
+Highlight braces following printf and say. Thanks, Matt Boyle.
+
 Fix overzealous matching of /^package/ inside Pod (Hinrik)
 
 Added */xs.vim.
@@ -17,6 +19,7 @@ Benjamin R. Haskell.
 
 Add %+ match hash to syntax/perl.vim.
 
+
 [FIXES]
 Minor tweak to p6RxCharClass.  Thanks, Arne Skjærholt.
 
@@ -27,9 +30,16 @@ order.  Thanks, Christian J. Robinson.
 Fixed bug where backslashes would be seen as closing a set of braces,
 thus screwing up indents.  Thanks, Tom Wyant.
 
+Fixed highlights on comments before opening brace of a sub. Thanks,
+Rafael Kitover.
+
+
 [TESTING]
 Added a test harness in t/ (try "make test"). Moved example code
 to t_source/ (Hinrik)
+
+Added a test for package declaration highlighting.  Thanks, Matt
+Boyle.
 
 Fixes to the test suite from Matt Boyle.
 
