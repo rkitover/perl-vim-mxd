@@ -495,7 +495,11 @@ if exists("perl_fold")
   syn sync fromstart
 else
   " fromstart above seems to set minlines even if perl_fold is not set.
-  syn sync minlines=0
+  if line('$') <= 5000
+    syn sync fromstart
+  else
+    syn sync minlines=0
+  endif
 endif
 
 command -nargs=+ HiLink hi def link <args>
