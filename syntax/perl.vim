@@ -73,6 +73,9 @@ if perl_moose_stuff
   " Test::More, Test::Moose and Test::Exception stuff (except for "is", which is already highlighted.)
   syn match perlStatementProc             "\<\%(plan\|use_ok\|require_ok\|ok\|isnt\|diag\|note\|explain\|like\|unlike\|cmp_ok\|is_deeply\|skip\|can_ok\|isa_ok\|new_ok\|pass\|fail\|skip\|todo_skip\|done_testing\|BAIL_OUT\|meta_ok\|does_ok\|has_attribute_ok\|throws_ok\|dies_ok\|lives_ok\|lives_and\|subtest\)\>"
 
+  " Test::Deep, except SPECIAL COMPARISONS
+  syn match perlStatementProc             "\<\%(cmp_deeply\|cmp_bag\|cmp_set\|cmp_methods\|eq_deeply\|cmp_details\|deep_diag\)\>"
+
   " Test::Differences
   syn match perlStatementProc             "\<\%(eq_or_diff\|eq_or_diff_data\|eq_or_diff_text\|table_diff\|unified_diff\|oldstyle_diff\|context_diff\)\>"
 
