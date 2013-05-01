@@ -83,8 +83,8 @@ if perl_moose_stuff
   " may be, will be better something like: \<\%(all_[a-z_]\+_ok\)\>
   syn match perlStatementProc             "\<\%(all_perl_files_ok\|all_critic_ok\|all_pod_coverage_ok\|all_pod_files_spelling_ok\|all_pod_files_ok\|all_cover_ok\)\>"
 
-  " Try::Tiny
-  syn match perlStatementProc             "\<\%(try\|catch\|finally\)\>"
+  " Try::Tiny and Error/Error::Simple
+  syn match perlStatementProc             "\<\%(try\|throw\|catch\|except\|otherwise\|finally\)\>"
 
   " Switch.pm
   syn match perlConditional               "\<\%(switch\|case\)\>"
