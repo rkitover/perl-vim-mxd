@@ -1,8 +1,8 @@
 " Vim filetype plugin file
 " Language:      Perl
 " Maintainer:    Andy Lester <andy@petdance.com>
-" Homepage:      http://github.com/petdance/vim-perl
-" Bugs/requests: http://github.com/petdance/vim-perl/issues
+" Homepage:      http://github.com/vim-perl/vim-perl
+" Bugs/requests: http://github.com/vim-perl/vim-perl/issues
 " Last Change:   2009-08-14
 
 if exists("b:did_ftplugin") | finish | endif
@@ -30,7 +30,7 @@ endif
 " Provided by Ned Konz <ned at bike-nomad dot com>
 "---------------------------------------------
 setlocal include=\\<\\(use\\\|require\\)\\>
-setlocal includeexpr=substitute(substitute(v:fname,'::','/','g'),'$','.pm','')
+setlocal includeexpr=substitute(substitute(substitute(v:fname,'::','/','g'),'->\*','',''),'$','.pm','')
 setlocal define=[^A-Za-z_]
 
 " The following line changes a global variable but is necessary to make

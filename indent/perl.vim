@@ -1,8 +1,8 @@
 " Vim indent file
 " Language:      Perl 5
 " Author:        Andy Lester <andy@petdance.com>
-" Homepage:      http://github.com/petdance/vim-perl
-" Bugs/requests: http://github.com/petdance/vim-perl/issues
+" Homepage:      http://github.com/vim-perl/vim-perl
+" Bugs/requests: http://github.com/vim-perl/vim-perl/issues
 " Last Change:   August 11, 2010
 
 " Suggestions and improvements by :
@@ -139,7 +139,7 @@ function GetPerlIndent()
                         \ || synid == "perlMatchStartEnd"
                         \ || synid == "perlHereDoc"
                         \ || synid =~ "^perlFiledescStatement"
-                        \ || synid =~ '^perl\(Sub\|Block\)Fold'
+                        \ || synid =~ '^perl\(Sub\|Block\|Package\)Fold'
                 let brace = strpart(line, bracepos, 1)
                 if brace == '(' || brace == '{' || brace == '['
                     let ind = ind + &sw
@@ -154,7 +154,7 @@ function GetPerlIndent()
             let synid = synIDattr(synID(v:lnum, bracepos, 0), "name")
             if synid == ""
                         \ || synid == "perlMatchStartEnd"
-                        \ || synid =~ '^perl\(Sub\|Block\)Fold'
+                        \ || synid =~ '^perl\(Sub\|Block\|Package\)Fold'
                 let ind = ind - &sw
             endif
         endif

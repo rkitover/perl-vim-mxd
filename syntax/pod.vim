@@ -9,9 +9,12 @@
 " ORIGINAL VERSION:
 "
 " Language:      Perl POD format
-" Maintainer:    Scott Bigham <dsb@killerbunnies.org>
-" Last Change:   2007 Jan 21
-"
+" Maintainer:    Andy Lester <andy@petdance.com>
+" Previously:    Scott Bigham <dsb@killerbunnies.org>
+" Homepage:      http://github.com/vim-perl/vim-perl
+" Bugs/requests: http://github.com/vim-perl/vim-perl/issues
+" Last Change:   2009-08-14
+
 " To add embedded POD documentation highlighting to your syntax file, add
 " the commands:
 "
@@ -34,6 +37,7 @@ elseif exists("b:current_syntax")
 endif
 
 " POD commands
+syn match podCommand    "^=encoding"  nextgroup=podCmdText contains=@NoSpell
 syn match podCommand    "^=head[1234]"  nextgroup=podCmdText contains=@NoSpell
 syn match podCommand    "^=item"        nextgroup=podCmdText contains=@NoSpell
 syn match podCommand    "^=over"        nextgroup=podOverIndent skipwhite contains=@NoSpell

@@ -4,6 +4,8 @@ Changelog for the vim-perl package
 ====================================
 [ENHANCEMENTS]
 perl5:
+New flags in 5.14 for the m//, s///, and tr/// operators are now highlighted
+(Karen Etheridge)
 
 Highlight braces following printf and say. Thanks, Matt Boyle.
 
@@ -18,6 +20,12 @@ instead of "elsif".  Also added "elseif" as an error.  Thanks,
 Benjamin R. Haskell.
 
 Add %+ match hash to syntax/perl.vim.
+
+"gf" lets you open modules when they are used outside "use" commands
+as in "Foo::Bar->new" (Manni Heumann, @mannih)
+
+Words like FIXME and TODO now include FIXME: and TODO: (@berekuk,
+Vyacheslav Matyukhin)
 
 
 [FIXES]
