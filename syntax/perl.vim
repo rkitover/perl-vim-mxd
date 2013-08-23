@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:      Perl 5 with MooseX::Declare and Moose keywords
-" Version:       0.19
+" Version:       0.20
 " Maintainer:    Rafael Kitover <rkitover@cpan.org>
 " Homepage:      https://github.com/rkitover/perl-vim-mxd
 " Bugs/requests: https://github.com/rkitover/perl-vim-mxd/issues
