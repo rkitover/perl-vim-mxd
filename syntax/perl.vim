@@ -120,6 +120,21 @@ if perl_moose_stuff
   endif
 endif
 
+"perlcritic comments
+hi def link perlCritic PreProc
+syn match perlCritic "(#[^#]*)\@<!#\zs#\s*no\s+critic\s*(([a-zA-Z0-9: ]*)|)\ze"
+syn match perlCritic "(#[^#]*)\@<!#\zs#\s*use\s+critic\ze"
+syn match perlComment "#.*" contains=perlTodo,perlCritic,@Spell
+
+"perltidy comments, always MUST be placed after "syn match perlComment" definition
+hi def link perlTidyComment Comment
+hi def link perlTidy PreProc
+syn match perlTidy "^\s*#\zs(<<<|>>>)\ze"
+syn match perlTidyComment "^\s*#(<<<|>>>).*" contains=perlTidy,@Spell
+
+"perlSharpBang, always MUST be placed after "syn match perlTidyComment" definition
+syn match perlSharpBang "^#!.*"
+
 let s:cpo_save = &cpo
 set cpo&vim
 
