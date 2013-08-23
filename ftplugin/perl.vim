@@ -1,9 +1,9 @@
 " Vim filetype plugin file
 " Language:      Perl
-" Maintainer:    Andy Lester <andy@petdance.com>
+" Maintainer:    vim-perl <vim-perl@googlegroups.com>
 " Homepage:      http://github.com/vim-perl/vim-perl
 " Bugs/requests: http://github.com/vim-perl/vim-perl/issues
-" Last Change:   2009-08-14
+" Last Change:   {{LAST_CHANGE}}
 
 if exists("b:did_ftplugin") | finish | endif
 let b:did_ftplugin = 1
@@ -13,7 +13,8 @@ let b:did_ftplugin = 1
 let s:save_cpo = &cpo
 set cpo-=C
 
-setlocal formatoptions+=crq
+setlocal formatoptions-=t
+setlocal formatoptions+=crqol
 setlocal keywordprg=perldoc\ -f
 
 setlocal comments=:#
@@ -39,6 +40,7 @@ setlocal define=[^A-Za-z_]
 " problem for you, add an after/ftplugin/perl.vim file that contains
 "       set isfname-=:
 set isfname+=:
+set iskeyword+=:
 
 " Set this once, globally.
 if !exists("perlpath")
@@ -78,5 +80,9 @@ endif
 let b:undo_ftplugin = "setlocal fo< com< cms< inc< inex< def< isf< kp< path<" .
 	    \	      " | unlet! b:browsefilter"
 
+" proper matching for matchit plugin
+let b:match_skip = 's:comment\|string\|perlQQ\|perlShellCommand\|perlHereDoc\|perlSubstitution\|perlTranslation\|perlMatch\|perlFormatField'
+
 " Restore the saved compatibility options.
 let &cpo = s:save_cpo
+unlet s:save_cpo

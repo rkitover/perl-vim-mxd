@@ -1,8 +1,8 @@
-package VimFolds;
+package Local::VimFolds;
 
 use strict;
 use warnings;
-use autodie;
+use autodie qw(open close fork waitpid exec);
 use parent 'Exporter';
 
 use Carp qw(croak);
@@ -12,8 +12,30 @@ use File::Temp;
 use Test::More;
 use Test::Deep;
 
+my $FOLD_RE = qr{
+    \s* [#] \s*
+    (?:
+        (?:[{][{][{])
+        |
+        (?:[}][}][}])
+    )
+    \s* $
+}xm;
+
 sub new {
     my ( $class, %params ) = @_;
+
+    if(my $options = $params{'options'}) {
+        $params{'script_before'} = join(' | ', map {
+            "let $_=" . $options->{$_}
+        } keys %$options);
+    }
+
+    if(my $tty = $params{'debug_tty'}) {
+        my $fh;
+        open $fh, '+<', $tty;
+        $params{'debug_tty'} = $fh;
+    }
 
     return bless { %params }, $class;
 }
@@ -82,22 +104,28 @@ END_VIM
     my $pty = IO::Pty->new;
     my $pid = fork;
 
-    croak "Unable to fork" unless defined $pid;
-
     if($pid) {
         $pty->close_slave;
         $pty->set_raw;
         sleep 1; # wait for folds to be set up
         print { $pty } ":call DumpFoldsAndQuit()\n";
-        while(<$pty>) {
-            # just read until the child is done
+        my $tty = $self->{'debug_tty'};
+        if($tty) {
+            my $char = '';
+            while(sysread($pty, $char, 1)) {
+                syswrite $tty, $char;
+            }
+        } else {
+            while(<$pty>) {
+                # just read until the child is done
+            }
         }
         close $pty;
         waitpid $pid, 0;
     } else {
         $pty->make_slave_controlling_terminal;
         my $slave = $pty->slave;
-        $slave->clone_winsize_from(\*STDIN);
+        $slave->clone_winsize_from($self->{'debug_tty'} || \*STDIN);
         $slave->set_raw;
 
         open STDIN,  '<&', $slave->fileno;
@@ -106,7 +134,7 @@ END_VIM
 
         close $slave;
 
-        exec 'vim', '-u', $script_file->filename, $filename;
+        exec 'vim', '-n', '-u', $script_file->filename, $filename;
     }
 
     my @folds;
@@ -130,40 +158,38 @@ END_VIM
 }
 
 sub _find_expected_folds {
-    my ( $self, $filename ) = @_;
+    my ( $self, $code ) = @_;
 
     my @folds;
     my @fold_stack;
 
-    my $fh;
-
-    open $fh, '<', $filename;
-    while(<$fh>) {
-        chomp;
-
-        if(/\Q{{{\E/) {
-            push @fold_stack, $.;
-        } elsif(/\Q}}}\E/) {
+    my $line_no = 1;
+    foreach my $line (split /\n/, $code) {
+        if($line =~ /\Q{{{\E/) {
+            push @fold_stack, $line_no;
+        } elsif($line =~ /\Q}}}\E/) {
             my $start = pop @fold_stack;
             push @folds, {
                 start => $start,
-                end   => $.,
+                end   => $line_no,
             };
         }
+        $line_no++;
     }
-    close $fh;
 
     return @folds;
 }
 
 sub folds_match {
-    my ( $self, $code ) = @_;
+    my ( $self, $code, $name ) = @_;
 
-    my $tempfile = File::Temp->new;
-    print { $tempfile } $code;
+    my $tempfile      = File::Temp->new;
+    my $foldless_code = $code;
+    $foldless_code    =~ s/$FOLD_RE//g;
+    print { $tempfile } $foldless_code;
     close $tempfile;
 
-    my @expected_folds = $self->_find_expected_folds($tempfile->filename);
+    my @expected_folds = $self->_find_expected_folds($code);
     my @got_folds      = $self->_get_folds($tempfile->filename);
 
     foreach my $fold (@got_folds) {
@@ -171,7 +197,7 @@ sub folds_match {
     }
     local $Test::Builder::Level =  $Test::Builder::Level + 1;
 
-    unless(cmp_set(\@got_folds, \@expected_folds)) {
+    unless(cmp_set(\@got_folds, \@expected_folds, $name)) {
         diag('Got: ' . join('', explain(\@got_folds)));
         diag('Expected: ' . join('', explain(\@expected_folds)));
     }

@@ -1,9 +1,9 @@
 " Vim filetype plugin file
 " Language:      Perl 6
-" Maintainer:    Andy Lester <andy@petdance.com>
+" Maintainer:    vim-perl <vim-perl@googlegroups.com>
 " Homepage:      http://github.com/vim-perl/vim-perl
 " Bugs/requests: http://github.com/vim-perl/vim-perl/issues
-" Last Change:   2010-08-10
+" Last Change:   {{LAST_CHANGE}}
 " Contributors:  Hinrik Örn Sigurðsson <hinrik.sig@gmail.com>
 "
 " Based on ftplugin/perl.vim by Dan Sharp <dwsharp at hotmail dot com>
@@ -16,7 +16,8 @@ let b:did_ftplugin = 1
 let s:save_cpo = &cpo
 set cpo-=C
 
-setlocal formatoptions+=crq
+setlocal formatoptions-=t
+setlocal formatoptions+=crqol
 setlocal keywordprg=p6doc
 
 setlocal comments=:#
@@ -73,3 +74,4 @@ let b:undo_ftplugin = "setlocal fo< com< cms< inc< inex< def< isk<" .
 
 " Restore the saved compatibility options.
 let &cpo = s:save_cpo
+unlet s:save_cpo
