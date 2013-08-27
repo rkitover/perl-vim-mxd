@@ -122,7 +122,7 @@ endif
 
 "perlcritic comments
 hi def link perlCritic PreProc
-syn match perlCritic "(#[^#]*)\@<!#\zs#\s*no\s+critic\s*(([a-zA-Z0-9: ]*)|)\ze"
+syn match perlCritic "(#[^#]*)\@<!#\zs#\s*no\s+critic\s*(([a-zA-Z0-9,: ]*)|)\ze"
 syn match perlCritic "(#[^#]*)\@<!#\zs#\s*use\s+critic\ze"
 syn match perlComment "#.*" contains=perlTodo,perlCritic,@Spell
 
