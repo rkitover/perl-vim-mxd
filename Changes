@@ -33,6 +33,14 @@ POD formatting highlights have been enabled inside POD blocks.
 
 Anonymous subroutines are now foldable.
 
+Added mason.vim. (Hinrik)
+
+map, grep and sort blocks are now properly indented.  Thanks, Brian
+M. Carlson.
+
+Provide information to matchit plugin to jump between if/elsif/else.
+Credit to Alan Young.
+
 [FIXES]
 Minor tweak to p6RxCharClass.  Thanks, Arne Skjærholt.
 
@@ -52,6 +60,7 @@ Keyword detection for "accept" was looking for "acept".
 
 Added higlighting for "import" and "format".
 
+Stop setting "iskeyword" globally. (Hinrik)
 
 [TESTING]
 Added a test harness in t/ (try "make test"). Moved example code

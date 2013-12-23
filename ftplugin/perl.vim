@@ -33,14 +33,14 @@ endif
 setlocal include=\\<\\(use\\\|require\\)\\>
 setlocal includeexpr=substitute(substitute(substitute(v:fname,'::','/','g'),'->\*','',''),'$','.pm','')
 setlocal define=[^A-Za-z_]
+setlocal iskeyword+=:
 
 " The following line changes a global variable but is necessary to make
-" gf and similar commands work.  The change to iskeyword was incorrect.
-" Thanks to Andrew Pimlott for pointing out the problem. If this causes a
-" problem for you, add an after/ftplugin/perl.vim file that contains
+" gf and similar commands work. Thanks to Andrew Pimlott for pointing
+" out the problem. If this causes a problem for you, add an
+" after/ftplugin/perl.vim file that contains
 "       set isfname-=:
 set isfname+=:
-set iskeyword+=:
 
 " Set this once, globally.
 if !exists("perlpath")
@@ -82,6 +82,7 @@ let b:undo_ftplugin = "setlocal fo< com< cms< inc< inex< def< isf< kp< path<" .
 
 " proper matching for matchit plugin
 let b:match_skip = 's:comment\|string\|perlQQ\|perlShellCommand\|perlHereDoc\|perlSubstitution\|perlTranslation\|perlMatch\|perlFormatField'
+let b:match_words = '\<if\>:\<elsif\>:\<else\>'
 
 " Restore the saved compatibility options.
 let &cpo = s:save_cpo
