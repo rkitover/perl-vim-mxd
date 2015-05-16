@@ -41,6 +41,14 @@ M. Carlson.
 Provide information to matchit plugin to jump between if/elsif/else.
 Credit to Alan Young.
 
+Added "fc" and "evalbytes" keywords.  Thanks, Rafael Kitover.
+
+Added optional highlighting for subroutine signatures, as well
+as highlighting for new postfix dereferencing.   Thanks, mattn!
+
+Added tap.vim (based on https://github.com/threebytesfull/perltest).  Thanks
+to Rufus Cable for sharing!
+
 [FIXES]
 Minor tweak to p6RxCharClass.  Thanks, Arne Skjærholt.
 
@@ -58,9 +66,11 @@ Braces within a heredoc no longer confuse the highlighting.
 
 Keyword detection for "accept" was looking for "acept".
 
-Added higlighting for "import" and "format".
+Added highlighting for "import" and "format".
 
 Stop setting "iskeyword" globally. (Hinrik)
+
+Fix folding for subroutines with prototypes. (zdm)
 
 [TESTING]
 Added a test harness in t/ (try "make test"). Moved example code
